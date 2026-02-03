@@ -128,11 +128,16 @@ tidy_anscombe <- anscombe %>%
 stats <- tidy_anscombe %>%
   group_by(set) %>%
   summarise(
-    mean_x = mean(x),
-    mean_y = mean(y),
-    sd_x = sd(x),
-    correlation = cor(x, y),
-    regression_slope = lm(y ~ x)$coefficients[2],
+    # Classic Anscombe numbers
+    #mean_x = mean(x),
+    #mean_y = mean(y),
+    #sd_x = sd(x),
+    #correlation = cor(x, y),
+    # Relevant numbers for teaching
+    intercept = lm(y ~ x)$coefficients[1],
+    p_intercept = tidy(lm(y ~ x))$p.value[1],
+    slope     = lm(y ~ x)$coefficients[2],
+    p_slope = tidy(lm(y ~ x))$p.value[2],
     r_squared = summary(lm(y ~ x))$r.squared
   )
 
